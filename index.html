@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./imgs/favicon.png" sizes="32x32" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Simple Calc</title>
+  </head>
+  <body>
+    <main>
+      <!-- left container -->
+      <div class="left-section container">
+        <div class="circle circle-one-left"></div>
+        <div class="circle circle-two-left"></div>
+        <div class="circle circle-three-left"></div>
+        <div class="circle circle-four-left"></div>
+      </div>
+      <!--left container ends-->
+
+      <!-- App container -->
+      <div class="app-section container">
+        <h1 class="app-title">The Polka Calc</h1>
+
+        <!-- calc container starts here -->
+        <div class="calc-container">
+          <div class="calc-row display">
+            <div class="expression">0</div>
+            <div class="result">0</div>
+          </div>
+          <!-- top row start -->
+          <div class="calc-row one">
+            <button type="button" class="button operator clear" id="clear-btn">
+              Clear
+            </button>
+            <button
+              type="button"
+              class="button operator negative"
+              id="negative-btn"
+            >
+              -/+
+            </button>
+            <button
+              type="button"
+              class="button operator divide"
+              id="divide-btn"
+            >
+              /
+            </button>
+          </div>
+          <!-- top row end -->
+
+          <!-- second row start -->
+          <div class="calc-row two">
+            <button type="button" class="button seven" id="seven-btn">7</button>
+            <button type="button" class="button eight" id="eight-btn">8</button>
+            <button type="button" class="button nine" id="nine-btn">9</button>
+            <button type="button" class="button operator" id="multiply-btn">
+              ×
+            </button>
+          </div>
+          <!-- second row end -->
+
+          <!-- third row start -->
+          <div class="calc-row three">
+            <button type="button" class="button four" id="four-btn">4</button>
+            <button type="button" class="button five" id="five-btn">5</button>
+            <button type="button" class="button six" id="six-btn">6</button>
+            <button type="button" class="button operator" id="minus-btn">
+              -
+            </button>
+          </div>
+          <!-- thrid row end -->
+
+          <!-- fourth row start -->
+          <div class="calc-row four">
+            <button type="button" class="button one" id="one-btn">1</button>
+            <button type="button" class="button two" id="two-btn">2</button>
+            <button type="button" class="button three" id="three-btn">3</button>
+            <button type="button" class="button operator" id="plus-btn">
+              +
+            </button>
+          </div>
+          <!-- fourth row ends -->
+
+          <!-- fifth row start -->
+          <div class="calc-row five">
+            <button type="button" class="button decimal" id="decimal-btn">
+              .
+            </button>
+            <button type="button" class="button zero" id="zero-btn">0</button>
+            <button type="button" class="button operator equal" id="equal-btn">
+              Find Out
+            </button>
+          </div>
+        </div>
+
+        <!-- calc container ends here -->
+      </div>
+      <!--App container ends-->
+
+      <!-- right continer -->
+      <div class="right-section container">
+        <div class="circle circle-one-right"></div>
+        <div class="circle circle-two-right"></div>
+        <div class="circle circle-three-right"></div>
+      </div>
+      <!--right container ends-->
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
