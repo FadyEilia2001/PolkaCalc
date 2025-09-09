@@ -70,6 +70,9 @@ ol {
   --color-border: #e5e7eb;
   --color-bg-accent: #fdba74;
   --color-bg-secondary-accent: #c4b5fd;
+  --color-operator-bg: #f3e8ff; /* soft lavender */
+  --digit-bg: #ffffff; /* digit circle fill */
+  --color-danger: #d61f26;
 
   /* Typography */
   --font-title: "Black Ops One", system-ui, sans-serif;
@@ -97,6 +100,7 @@ ol {
   --shadow-btn: inset 3px 3px 6px rgba(0, 0, 0, 0.12),
     inset -3px -3px 6px rgba(255, 255, 255, 0.7);
   --shadow-accent: 0 0 12px rgba(253, 216, 53, 0.5);
+  --shadow-danger: 0 0 12px rgba(214, 31, 38, 0.35);
   --transition: all 0.18s ease-in-out;
 }
 
@@ -121,10 +125,16 @@ ol {
   --color-bg-accent: hsl(31, 97%, 72%);
   --color-bg-secondary-accent: #c4b5fd;
   --color-operator-bg: #f3e8ff;
+  --digit-bg: #22142d; /* darker than panel for separation */
+  --panel-stroke: rgba(162, 89, 255, 0.25); /* subtler outline if you use it */
+  --color-bg-accent: #b88ba6; /* cooler peach/pink */
+  --color-bg-secondary-accent: #9a8ac2;
+  --color-danger: #ff3b7f;
 
   --shadow-body: 0 10px 30px rgba(0, 0, 0, 0.35);
   --shadow-btn: 0 4px 14px rgba(0, 0, 0, 0.35);
   --shadow-accent: 0 0 16px rgba(255, 0, 170, 0.6);
+  --shadow-danger: 0 0 16px rgba(255, 59, 127, 0.45);
 }
 
 /* Start app design */
@@ -240,6 +250,7 @@ main {
   gap: 20px;
   min-width: 320px;
   max-width: 480px;
+  width: clamp(320px, 90vw, 480px);
 }
 
 .app-title {
@@ -259,6 +270,7 @@ main {
   border-radius: var(--padding-container);
   border: 1px solid var(--color-bg-secondary-accent);
   /* padding: var(--space-sm); */
+  border: 1px solid var(--panel-stroke); /* uses the new subtle rgba */
 }
 
 .calc-row {
@@ -309,18 +321,6 @@ main {
   color: white;
 }
 
-.display {
-  min-height: 20%;
-  background: linear-gradient(145deg, #f8fafc, #ede9fe);
-  box-shadow: 0 20px 30px -10px #ede9fe;
-  border-top-left-radius: var(--padding-container);
-  border-top-right-radius: var(--padding-container);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  position: relative;
-  border-bottom: 1px solid var(--color-bg-secondary-accent);
-}
-
 /* psuedo classes */
 /* hover ACtive*/
 
@@ -369,29 +369,64 @@ main {
   box-shadow: 0 0 10px var(--color-operator), 0 0 20px var(--color-operator);
 }
 
+:root .operator:hover {
+  color: var(--color-neutral-btn-text);
+}
+
+[data-theme="dark"] .operator:hover {
+  color: var(--color-operator);
+}
+
+[data-theme="dark"] .button.operator:hover {
+  background-color: var(--color-bg-secondary-accent); /* or var(--digit-bg) */
+  color: var(--color-operator);
+}
+
 .operator:active {
   transform: scale(0.95);
-  background-color: var(--color-disabled-btn-bg);
+  background-color: var(--color-bg-secondary-accent);
   color: var(--color-disabled-btn-text);
   box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+/* Dark mode: DIGIT buttons only (not operator, equal, or clear) */
+[data-theme="dark"] .button:not(.operator):not(.equal):not(.clear):hover {
+  background-color: var(--color-bg-accent);
+  color: var(--color-neutral-btn-text); /* #EDE7F1 */
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(162, 89, 255, 0.25),
+    /* soft purple aura */ 0 0 20px rgba(162, 89, 255, 0.2);
+}
+
+[data-theme="dark"] .button:not(.operator):not(.equal):not(.clear):active {
+  transform: scale(0.97);
+  background-color: var(
+    --color-bg-accent
+  ); /* a hair darker than var(--digit-bg) for press feedback */
+  color: var(--color-neutral-btn-text);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.45),
+    /* stronger inset for tactile feel */ inset -1px -1px 2px
+      rgba(255, 255, 255, 0.06);
+}
+
+/* Display container */
 /* Display container */
 .display {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end; /* aligns text to the right */
+  align-items: flex-end;
   padding: var(--space-md);
   gap: var(--space-xs);
   background: linear-gradient(145deg, #f8fafc, #ede9fe);
-  box-shadow: 0 20px 30px -10px #ede9fe;
+  box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.35),
+    /* top inner tint */ inset 0 -12px 18px rgba(0, 0, 0, 0.06);
   border-top-left-radius: var(--padding-container);
   border-top-right-radius: var(--padding-container);
   border-bottom: 1px solid var(--color-bg-secondary-accent);
   min-height: 20%;
+  overflow: hidden;
 }
-
 /* Expression (smaller, muted) */
 .expression {
   font-size: var(--font-size-expression);
@@ -401,25 +436,78 @@ main {
   white-space: nowrap;
   width: 100%;
   text-align: right;
+  overflow: hidden;
 }
 
 /* Result (bigger, bold) */
 .result {
   font-size: var(--font-size-result);
   color: var(--color-screen-result);
-  font-weight: 600;
+  font-weight: 300;
   overflow-x: auto;
   white-space: nowrap;
   width: 100%;
   text-align: right;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .display {
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 12%
+    ),
+    linear-gradient(145deg, #11001c, #1b0b27);
+  box-shadow: inset 0 8px 16px rgba(255, 170, 255, 0.1),
+    inset 0 -14px 22px rgba(0, 0, 0, 0.35);
+  border-bottom-color: rgba(196, 181, 253, 0.25); /* soften the divider */
+}
+
+[data-theme="dark"] .button:hover {
+  background-color: var(--digit-bg); /* keep it same fill */
+  box-shadow: 0 0 14px rgba(162, 89, 255, 0.25);
 }
 
 .blink {
-  animation: blink 1s step-start infinite;
+  animation: blink 1.5s step-start infinite;
 }
 
 @keyframes blink {
   50% {
     opacity: 0;
   }
+}
+
+.is-error {
+  color: var(--color-danger);
+}
+/* optional glow on error states */
+.is-error-glow {
+  text-shadow: var(--shadow-danger);
+}
+
+#toggle {
+  background-color: var(--color-bg-secondary-accent);
+  color: var(--color-text);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 20px;
+}
+
+#toggle:hover {
+  background-color: var(--color-bg-secondary-accent);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--color-accent), 0 0 24px var(--color-accent);
+  transition: var(--transition);
+}
+
+#toggle:active {
+  transform: scale(0.97);
+  background-color: var(--color-disabled-btn-bg);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Optional: ensure good contrast in dark theme on hover */
+[data-theme="dark"] #toggle:hover {
+  background-color: var(--digit-bg);
+  box-shadow: 0 0 14px rgba(162, 89, 255, 0.25);
 }

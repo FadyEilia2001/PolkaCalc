@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,29 +21,33 @@
       <!-- App container -->
       <div class="app-section container">
         <h1 class="app-title">The Polka Calc</h1>
-
+        <button id="toggle">Toggle Theme</button>
         <!-- calc container starts here -->
         <div class="calc-container">
           <div class="calc-row display">
-            <div class="expression">0</div>
-            <div class="result">0</div>
+            <div class="expression" id="result-display">
+              Expression will show here
+            </div>
+            <div class="result blink" id="txt-display">|</div>
           </div>
           <!-- top row start -->
           <div class="calc-row one">
-            <button type="button" class="button operator clear" id="clear-btn">
+            <button
+              value="clear"
+              type="button"
+              class="button operator clear"
+              id="clear-btn"
+            >
               Clear
             </button>
-            <button
-              type="button"
-              class="button operator negative"
-              id="negative-btn"
-            >
+            <button type="button" class="button negative" id="negative-btn">
               -/+
             </button>
             <button
               type="button"
               class="button operator divide"
               id="divide-btn"
+              value="/"
             >
               /
             </button>
@@ -52,10 +56,36 @@
 
           <!-- second row start -->
           <div class="calc-row two">
-            <button type="button" class="button seven" id="seven-btn">7</button>
-            <button type="button" class="button eight" id="eight-btn">8</button>
-            <button type="button" class="button nine" id="nine-btn">9</button>
-            <button type="button" class="button operator" id="multiply-btn">
+            <button
+              value="7"
+              type="button"
+              class="button seven digit"
+              id="seven-btn"
+            >
+              7
+            </button>
+            <button
+              type="button"
+              class="button eight digit"
+              id="eight-btn"
+              value="8"
+            >
+              8
+            </button>
+            <button
+              type="button"
+              class="button nine digit"
+              id="nine-btn"
+              value="9"
+            >
+              9
+            </button>
+            <button
+              value="x"
+              type="button"
+              class="button operator"
+              id="multiply-btn"
+            >
               ×
             </button>
           </div>
@@ -63,10 +93,36 @@
 
           <!-- third row start -->
           <div class="calc-row three">
-            <button type="button" class="button four" id="four-btn">4</button>
-            <button type="button" class="button five" id="five-btn">5</button>
-            <button type="button" class="button six" id="six-btn">6</button>
-            <button type="button" class="button operator" id="minus-btn">
+            <button
+              type="button"
+              class="button four digit"
+              id="four-btn"
+              value="4"
+            >
+              4
+            </button>
+            <button
+              type="button"
+              class="button five digit"
+              id="five-btn"
+              value="5"
+            >
+              5
+            </button>
+            <button
+              type="button"
+              class="button six digit"
+              id="six-btn"
+              value="6"
+            >
+              6
+            </button>
+            <button
+              type="button"
+              class="button operator"
+              id="minus-btn"
+              value="-"
+            >
               -
             </button>
           </div>
@@ -74,10 +130,36 @@
 
           <!-- fourth row start -->
           <div class="calc-row four">
-            <button type="button" class="button one" id="one-btn">1</button>
-            <button type="button" class="button two" id="two-btn">2</button>
-            <button type="button" class="button three" id="three-btn">3</button>
-            <button type="button" class="button operator" id="plus-btn">
+            <button
+              type="button"
+              class="button one digit"
+              id="one-btn"
+              value="1"
+            >
+              1
+            </button>
+            <button
+              type="button"
+              class="button two digit"
+              id="two-btn"
+              value="2"
+            >
+              2
+            </button>
+            <button
+              type="button"
+              class="button three digit"
+              id="three-btn"
+              value="3"
+            >
+              3
+            </button>
+            <button
+              type="button"
+              class="button operator"
+              id="plus-btn"
+              value="+"
+            >
               +
             </button>
           </div>
@@ -88,8 +170,20 @@
             <button type="button" class="button decimal" id="decimal-btn">
               .
             </button>
-            <button type="button" class="button zero" id="zero-btn">0</button>
-            <button type="button" class="button operator equal" id="equal-btn">
+            <button
+              type="button"
+              class="button zero digit"
+              id="zero-btn"
+              value="0"
+            >
+              0
+            </button>
+            <button
+              type="button"
+              class="button operator equal"
+              id="equal-btn"
+              value="equal"
+            >
               Find Out
             </button>
           </div>
